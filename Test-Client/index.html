@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>KLBCC Client Test App</title>
+
+        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    </head>
+
+    <body>
+        <h1>KLBCC Client Test App</h1>
+
+        <textarea id="output" rows="20" cols="80" readonly></textarea><br>
+        <input type="text" id="message" placeholder="Type message...">
+        <button onclick="sendMessage()">Send</button>
+
+        <script>
+            const clientId = 'client-' + Math.floor(Math.random() * 1000);
+            const socket = io('http://localhost:3000', {
+                auth: { clientId },
+                action: 'join'
+            });
+
+            let connected = false;
+            if (!connected) {
+                socket.emit('message', { action: 'join', clientId: clientId });
+                connected = true;
+            }
+
+            const output = document.getElementById('output');
+
+            socket.on('connect', () => {
+                console.log += `[Connected as ${clientId}]\n`;
+            });
+
+            socket.on('disconnect', () => {
+                console.log += '[Disconnected]\n';
+                output.value = '';
+            });
+
+            socket.on('message', (data) => {
+                if (data.from === 'system') {
+                    printSystemMessage(data.content);
+                } else {
+                    output.value += `${data.from}: ${data.content}\n`;
+                }
+            });
+
+            function printSystemMessage(content)
+            {
+                output.value += `[${content}]\n`;
+            }
+
+            function sendMessage()
+            {
+                const msg = document.getElementById('message').value;
+                if (msg.trim() === '') return;
+
+                socket.emit('message', { content: msg });
+                document.getElementById('message').value = '';
+            }
+        </script>
+    </body>
+</html>
