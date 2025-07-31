@@ -30,7 +30,11 @@ function getOrInitRoom(roomId: string): GameRoomCRDT
     return roomDocs.get(roomId)!;
 }
 
-export function getOrInitRoomFoTest(roomId: string) {
+/**
+ * Wrapper for getOrInitRoom() for unit test
+ * @param roomId
+ */
+export function getOrInitRoomForTest(roomId: string) {
     return getOrInitRoom(roomId)
 }
 

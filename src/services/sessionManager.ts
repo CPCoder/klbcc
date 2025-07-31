@@ -9,7 +9,6 @@
 import { Socket, DefaultEventsMap } from 'socket.io';
 import { assignRandomGameRoom } from './matchMaking';
 import { log } from '../utils/logger';
-import {handleMessage, joinRoom} from '../actors/gameRoomActor';
 
 /**
  * Session handler

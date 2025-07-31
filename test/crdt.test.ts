@@ -1,5 +1,5 @@
 /*
- * Project:     klbcc
+ * Project:     KLBCC
  * File:        crdt.test.ts
  * Date:        2025-07-30
  * Author:      Steffen Haase <shworx.development@gmail.com

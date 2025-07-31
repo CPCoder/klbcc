@@ -13,6 +13,11 @@ type MessageDoc = { messages: string[] };
 
 const gameRoomDocs: Map<string, GameRoomCRDT> = new Map();
 
+/**
+ * Initialize or return existing CRDT document
+ *
+ * @param roomId - The Game room ID
+ */
 export function getOrInitCRDT(roomId: string): GameRoomCRDT {
     if (!gameRoomDocs.has(roomId)) {
         const doc: Automerge.Doc<MessageDoc> = Automerge.from({ messages: [] });
@@ -24,6 +29,12 @@ export function getOrInitCRDT(roomId: string): GameRoomCRDT {
     return gameRoomDocs.get(roomId)!;
 }
 
+/**
+ * Applies changes to a CRDT document
+ *
+ * @param roomId - The Game room ID
+ * @param change - The changes
+ */
 export function applyCRDTChange(roomId: string, change: Uint8Array): MessageDoc {
     const gameRoom = getOrInitCRDT(roomId);
     const [newDoc] = Automerge.applyChanges(gameRoom.doc, [change]);

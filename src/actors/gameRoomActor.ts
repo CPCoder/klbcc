@@ -9,8 +9,8 @@
 import { Socket } from 'socket.io';
 import { EventEmitter } from 'events';
 import { GameRoom } from '../interfaces/gameRoom';
-import {jsonObj} from '../interfaces/jsonObj';
-import {log} from '../utils/logger';
+import { jsonObj } from '../interfaces/jsonObj';
+import { log } from '../utils/logger';
 
 const gameRooms: Map<string, GameRoom> = new Map();
 

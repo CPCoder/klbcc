@@ -6,8 +6,8 @@
  * Copyright:   2025 SHWorX (Steffen Haase)
  */
 
-import {EventEmitter} from 'events';
-import {Socket} from 'socket.io';
+import { EventEmitter } from 'events';
+import { Socket } from 'socket.io';
 
 export interface GameRoom
 {
