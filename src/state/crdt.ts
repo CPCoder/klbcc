@@ -8,8 +8,7 @@
 
 import * as Automerge from '@automerge/automerge';
 import { GameRoomCRDT } from '../interfaces/gameRoomCRDT';
-
-type MessageDoc = { messages: string[] };
+import { MessageDoc } from '../types/MessageDoc';
 
 const gameRoomDocs: Map<string, GameRoomCRDT> = new Map();
 
